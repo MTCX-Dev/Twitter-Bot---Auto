@@ -33,19 +33,20 @@ def send_post():
     lines = [tweet for tweet in lines if tweet.strip() not in posted_tweets]
 
     if lines: 
-        for tweet_text in lines:
-            tweet_text = tweet_text.strip()
-            client.create_tweet(text=f"{tweet_text}")
-            confirmation = f"'{tweet_text}' has been tweeted successfully on {get_formatted_date()}"
-            print(confirmation)
-            posted_tweets.add(tweet_text)
+        tweet_text = lines.pop(0).strip()  # Get and remove the first tweet from the list
+        client.create_tweet(text=f"{tweet_text}")
+        confirmation = f"'{tweet_text}' has been tweeted successfully on {get_formatted_date()}"
+        print(confirmation)
+        posted_tweets.add(tweet_text)
     else:
         print("No new tweets to post.")
 
+    # Reschedule the send_post function to run again after the specified interval
+    schedule.every(interval).minutes.do(send_post)
 
 def run_scheduler():
     print('Auto tweet has started')
-    schedule.every(interval).minutes.do(send_post)
+    send_post()  # Start by sending the first tweet immediately
     while True:
         schedule.run_pending()
         time.sleep(1)
