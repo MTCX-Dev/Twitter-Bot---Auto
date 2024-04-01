@@ -9,15 +9,12 @@ access_token = config.ACCESS_TOKEN
 access_token_secret = config.ACCESS_TOKEN_SECRET
 interval = config.INTERVAL
 
-
 def initialize_tweepy():
     client = tweepy.Client(bearer_token, api_key, api_secret, access_token, access_token_secret)
-    auth = tweepy.OAuthHandler(api_key, api_secret, access_token, access_token_secret)
-    api = tweepy.API(auth)
-    return client, api
+    return client
 
-client, api = initialize_tweepy()
+client = initialize_tweepy()
 user = client.me()  # Retrieve authenticated user's details
 name = user.name
-username = user.screen_name
+username = user.username
 print(f"Authenticated as {name} (@{username})")
