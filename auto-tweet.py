@@ -39,7 +39,7 @@ def send_post():
         print(confirmation)
         posted_tweets.add(tweet_text)
     else:
-        print("No new tweets to post.")
+        print("No more tweets to post. Update your tweets or start the program again.")
 
     # Reschedule the send_post function to run again after the specified interval
     schedule.every(interval).minutes.do(send_post)
