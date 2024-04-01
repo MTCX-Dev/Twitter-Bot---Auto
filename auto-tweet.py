@@ -20,10 +20,6 @@ def initialize_tweepy():
     api = tweepy.API(auth)
     return client, api
 
-def follow_dev(api):
-    dev = "mtcxx_"
-    api.create_friendship(dev)
-
 def get_formatted_date():
     current_datetime = datetime.datetime.now()
     return current_datetime.strftime("%B %d, %Y %H:%M:%S")
@@ -46,8 +42,6 @@ def send_post():
         print("No new tweets to post.")
 
 def run_scheduler():
-    _, api = initialize_tweepy()  # Get the API object
-    follow_dev(api)  # Pass the API object to follow_dev
     print('Auto tweet has started')
     schedule.every(interval).minutes.do(send_post)  # Schedule the send_post function to run at regular intervals
 
