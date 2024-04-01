@@ -25,8 +25,8 @@ def follow_dev(api):
     api.create_friendship(dev)
 
 def get_formatted_date():
-    current_date = datetime.date.today()
-    return current_date.strftime("%B %d, %Y")
+    current_datetime = datetime.datetime.now()
+    return current_datetime.strftime("%B %d, %Y %H:%M:%S")
 
 def send_post():
     client, _ = initialize_tweepy()
