@@ -10,11 +10,14 @@ access_token_secret = config.ACCESS_TOKEN_SECRET
 interval = config.INTERVAL
 
 def initialize_tweepy():
-    client = tweepy.Client(bearer_token, api_key, api_secret, access_token, access_token_secret)
-    return client
+    auth = tweepy.OAuthHandler(api_key, api_secret, access_token, access_token_secret)
+    api = tweepy.API(auth)
+    return api
 
-client = initialize_tweepy()
-user = client.me()  # Retrieve authenticated user's details
+api = initialize_tweepy()
+
+# Retrieve authenticated user's details directly from the API response
+user = api.verify_credentials()
 name = user.name
-username = user.username
+username = user.screen_name
 print(f"Authenticated as {name} (@{username})")
