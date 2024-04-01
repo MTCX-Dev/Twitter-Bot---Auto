@@ -16,8 +16,8 @@ def initialize_tweepy():
     api = tweepy.API(auth)
     return client, api
 
-_, api = initialize_tweepy()
-user = api.me()  # Retrieve authenticated user's details
+client, api = initialize_tweepy()
+user = client.me()  # Retrieve authenticated user's details
 name = user.name
 username = user.screen_name
 print(f"Authenticated as {name} (@{username})")
