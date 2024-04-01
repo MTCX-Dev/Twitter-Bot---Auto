@@ -42,7 +42,7 @@ def send_post():
         print("No new tweets to post.")
 
 def run_scheduler():
-    print('Auto tweet has started')
+    print('Farming has started')
     schedule.every(interval).minutes.do(send_post)  # Schedule the send_post function to run at regular intervals
 
     while True:
